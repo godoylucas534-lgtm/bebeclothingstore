@@ -6,7 +6,7 @@
 <title>Bebe Clothing Store — Moda Femenina</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- FIREBASE COMPAT SDK — funciona en GitHub Pages -->
+<!-- FIREBASE COMPAT SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
@@ -30,8 +30,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.9
 .nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
 .logo{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:var(--blanco);letter-spacing:.14em;text-decoration:none;}
 .logo span{font-style:italic;color:var(--dorado);}
-.nav-links{display:flex;list-style:none;gap:2.5rem;align-items:center;}
-.nav-links a{text-decoration:none;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blanco-60);transition:var(--tr);position:relative;}
+.nav-links{display:flex;list-style:none;gap:2rem;align-items:center;}
+.nav-links a{text-decoration:none;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blanco-60);transition:var(--tr);position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:100%;height:1px;background:var(--dorado);transition:right .3s ease;}
 .nav-links a:hover{color:var(--dorado);}
 .nav-links a:hover::after{right:0;}
@@ -74,21 +74,21 @@ section{padding:5rem 2rem;}
 .section-title em{font-style:italic;color:var(--dorado);}
 .gold-line{width:3rem;height:1px;background:var(--dorado);margin:.75rem auto 0;}
 
-/* CATEGORIES */
+/* CATEGORIES — grid adaptable para 11 categorías */
 #categories{background:var(--negro-mid);}
-.cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;}
-.cat-card{background:var(--negro-card);border:1px solid var(--negro-borde);border-radius:var(--radius-lg);padding:2rem 1rem;text-align:center;cursor:pointer;transition:var(--tr);text-decoration:none;}
+.cats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;}
+.cat-card{background:var(--negro-card);border:1px solid var(--negro-borde);border-radius:var(--radius-lg);padding:1.5rem .75rem;text-align:center;cursor:pointer;transition:var(--tr);text-decoration:none;}
 .cat-card:hover{border-color:var(--dorado);transform:translateY(-4px);box-shadow:var(--shadow-gold);}
-.cat-icon{font-size:2rem;margin-bottom:.75rem;display:block;}
-.cat-name{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blanco-60);font-weight:500;transition:var(--tr);}
+.cat-icon{font-size:1.75rem;margin-bottom:.6rem;display:block;}
+.cat-name{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blanco-60);font-weight:500;transition:var(--tr);}
 .cat-card:hover .cat-name{color:var(--dorado);}
-.cat-count{font-size:.72rem;color:var(--text-dim);margin-top:.3rem;}
+.cat-count{font-size:.68rem;color:var(--text-dim);margin-top:.25rem;}
 
 /* PRODUCTS */
 #catalogo{background:var(--negro);}
-.filters{display:flex;gap:.75rem;margin-bottom:2.5rem;flex-wrap:wrap;align-items:center;}
+.filters{display:flex;gap:.6rem;margin-bottom:2.5rem;flex-wrap:wrap;align-items:center;}
 .filter-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-right:.5rem;}
-.filter-btn{background:none;border:1px solid var(--negro-borde);padding:.4rem 1.1rem;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.1em;color:var(--blanco-60);cursor:pointer;border-radius:20px;transition:var(--tr);}
+.filter-btn{background:none;border:1px solid var(--negro-borde);padding:.35rem .9rem;font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.08em;color:var(--blanco-60);cursor:pointer;border-radius:20px;transition:var(--tr);}
 .filter-btn:hover,.filter-btn.active{background:rgba(201,168,76,.12);border-color:var(--dorado);color:var(--dorado);}
 .price-filter{margin-left:auto;display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:var(--text-mid);}
 .price-filter select{border:1px solid var(--negro-borde);background:var(--negro-card);padding:.4rem .8rem;font-family:'Jost',sans-serif;font-size:.75rem;color:var(--blanco-60);border-radius:var(--radius);cursor:pointer;}
@@ -298,8 +298,9 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
 .qv-size-chip:hover,.qv-size-chip.selected{border-color:var(--dorado);color:var(--dorado);background:rgba(201,168,76,.1);}
 .qv-badge-el{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dorado);border:1px solid var(--dorado);display:inline-block;padding:.2rem .7rem;border-radius:2px;margin-bottom:.75rem;}
 
-@media(max-width:1024px){.products-grid{grid-template-columns:repeat(3,1fr)}.cats-grid{grid-template-columns:repeat(3,1fr)}.footer-inner{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){#home{grid-template-columns:1fr}.hero-image{display:none}.hero-text{padding:3rem 2rem}.hero-title{font-size:2.8rem}.products-grid{grid-template-columns:repeat(2,1fr)}.cats-grid{grid-template-columns:repeat(2,1fr)}.about-grid,.contact-grid{grid-template-columns:1fr}.about-visual{height:280px}.nav-links{display:none}.hamburger{display:flex}.footer-inner{grid-template-columns:1fr;gap:2rem}.form-grid{grid-template-columns:1fr}.cart-sidebar{width:100%;right:-100%}.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}.qv-inner{grid-template-columns:1fr}.qv-img{height:220px;border-radius:var(--radius-lg) var(--radius-lg) 0 0}.qv-info{padding:1.25rem}}
+@media(max-width:1200px){.cats-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:1024px){.products-grid{grid-template-columns:repeat(3,1fr)}.cats-grid{grid-template-columns:repeat(4,1fr)}.footer-inner{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){#home{grid-template-columns:1fr}.hero-image{display:none}.hero-text{padding:3rem 2rem}.hero-title{font-size:2.8rem}.products-grid{grid-template-columns:repeat(2,1fr)}.cats-grid{grid-template-columns:repeat(3,1fr)}.about-grid,.contact-grid{grid-template-columns:1fr}.about-visual{height:280px}.nav-links{display:none}.hamburger{display:flex}.footer-inner{grid-template-columns:1fr;gap:2rem}.form-grid{grid-template-columns:1fr}.cart-sidebar{width:100%;right:-100%}.footer-bottom{flex-direction:column;gap:.5rem;text-align:center}.qv-inner{grid-template-columns:1fr}.qv-img{height:220px;border-radius:var(--radius-lg) var(--radius-lg) 0 0}.qv-info{padding:1.25rem}}
 @media(max-width:480px){.products-grid{grid-template-columns:1fr}.cats-grid{grid-template-columns:repeat(2,1fr)}.hero-ctas{flex-direction:column}.about-values{grid-template-columns:1fr}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .hero-tag{animation:fadeInUp .6s ease both}.hero-title{animation:fadeInUp .6s .15s ease both}.hero-desc{animation:fadeInUp .6s .25s ease both}.hero-ctas{animation:fadeInUp .6s .35s ease both}
@@ -373,6 +374,11 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
       <a href="#catalogo" class="cat-card" onclick="filterCategory('pantalones')"><span class="cat-icon">👖</span><div class="cat-name">Pantalones</div><div class="cat-count" id="cnt-pantalones">— artículos</div></a>
       <a href="#catalogo" class="cat-card" onclick="filterCategory('faldas')"><span class="cat-icon">🪡</span><div class="cat-name">Faldas</div><div class="cat-count" id="cnt-faldas">— artículos</div></a>
       <a href="#catalogo" class="cat-card" onclick="filterCategory('accesorios')"><span class="cat-icon">👜</span><div class="cat-name">Accesorios</div><div class="cat-count" id="cnt-accesorios">— artículos</div></a>
+      <a href="#catalogo" class="cat-card" onclick="filterCategory('calzados')"><span class="cat-icon">👟</span><div class="cat-name">Calzados</div><div class="cat-count" id="cnt-calzados">— artículos</div></a>
+      <a href="#catalogo" class="cat-card" onclick="filterCategory('sweaters')"><span class="cat-icon">🧥</span><div class="cat-name">Sweaters</div><div class="cat-count" id="cnt-sweaters">— artículos</div></a>
+      <a href="#catalogo" class="cat-card" onclick="filterCategory('remeras')"><span class="cat-icon">👕</span><div class="cat-name">Remeras</div><div class="cat-count" id="cnt-remeras">— artículos</div></a>
+      <a href="#catalogo" class="cat-card" onclick="filterCategory('hoodies')"><span class="cat-icon">🧤</span><div class="cat-name">Hoodies</div><div class="cat-count" id="cnt-hoodies">— artículos</div></a>
+      <a href="#catalogo" class="cat-card" onclick="filterCategory('joggers')"><span class="cat-icon">🩳</span><div class="cat-name">Joggers</div><div class="cat-count" id="cnt-joggers">— artículos</div></a>
     </div>
   </div>
 </section>
@@ -393,6 +399,11 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
       <button class="filter-btn" onclick="filterProducts('pantalones',this)">Pantalones</button>
       <button class="filter-btn" onclick="filterProducts('faldas',this)">Faldas</button>
       <button class="filter-btn" onclick="filterProducts('accesorios',this)">Accesorios</button>
+      <button class="filter-btn" onclick="filterProducts('calzados',this)">Calzados</button>
+      <button class="filter-btn" onclick="filterProducts('sweaters',this)">Sweaters</button>
+      <button class="filter-btn" onclick="filterProducts('remeras',this)">Remeras</button>
+      <button class="filter-btn" onclick="filterProducts('hoodies',this)">Hoodies</button>
+      <button class="filter-btn" onclick="filterProducts('joggers',this)">Joggers</button>
       <div class="price-filter">
         <span>Ordenar:</span>
         <select onchange="sortProducts(this.value)">
@@ -422,7 +433,7 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
       <div>
         <div class="section-tag">Nuestra historia</div>
         <h2 class="section-title" style="text-align:left;margin-bottom:1.5rem">Más que moda,<br><em>una experiencia</em></h2>
-        <p class="about-p">¡10 años trayendo tus marcas favoritas! 🇺🇸✨ Todo empezó hace una década con un objetivo claro: que puedas tener lo último de la moda de USA sin moverte de casa. Marcas 100% originales (Tommy, CK, MK, Guess), importación directa y garantizada.</p>
+        <p class="about-p">¡10 años trayendo tus marcas favoritas! 🇺🇸✨ Todo empezó hace una década con un objetivo claro: que puedas tener lo último de la moda de USA sin moverte de casa. 10 años de trayectoria, marcas 100% originales (Tommy, CK, MK, Guess), importación directa y garantizada.</p>
         <div class="about-values">
           <div class="value-item"><div class="value-dot"></div><div class="value-text"><strong>Calidad Premium</strong>Materiales seleccionados para mayor durabilidad.</div></div>
           <div class="value-item"><div class="value-dot"></div><div class="value-text"><strong>100% Originales</strong>Importación directa desde EE. UU.</div></div>
@@ -456,7 +467,18 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
           <div class="form-grid">
             <div class="form-group"><label>Nombre del producto</label><input type="text" id="newName" placeholder="Ej: Vestido Tommy Hilfiger"></div>
             <div class="form-group"><label>Categoría</label>
-              <select id="newCat"><option value="vestidos">Vestidos</option><option value="blusas">Blusas</option><option value="pantalones">Pantalones</option><option value="faldas">Faldas</option><option value="accesorios">Accesorios</option></select>
+              <select id="newCat">
+                <option value="vestidos">Vestidos</option>
+                <option value="blusas">Blusas</option>
+                <option value="pantalones">Pantalones</option>
+                <option value="faldas">Faldas</option>
+                <option value="accesorios">Accesorios</option>
+                <option value="calzados">Calzados</option>
+                <option value="sweaters">Sweaters</option>
+                <option value="remeras">Remeras</option>
+                <option value="hoodies">Hoodies</option>
+                <option value="joggers">Joggers</option>
+              </select>
             </div>
             <div class="form-group"><label>Precio (₲)</label><input type="number" id="newPrice" placeholder="250000"></div>
             <div class="form-group"><label>Precio tachado (opcional)</label><input type="number" id="newOldPrice" placeholder="350000"></div>
@@ -584,7 +606,7 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
 
 <script>
 // ══════════════════════════════════
-//  FIREBASE CONFIG
+//  FIREBASE CONFIG — SDK COMPAT
 // ══════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyCZVVsB6g6CpNzx78Ua1GNQVZyjjWwUoSE",
@@ -608,21 +630,21 @@ let products = [];
 let cart = [];
 let currentFilter = 'todos';
 let pendingPhotoFile = null;
-let pendingPhotoData = null;
 
-const emojis = {vestidos:'👗',blusas:'👚',pantalones:'👖',faldas:'🪡',accesorios:'👜'};
-const bgColors = {vestidos:'#1a1010',blusas:'#101510',pantalones:'#10101a',faldas:'#181210',accesorios:'#151015'};
+const CATS = ['vestidos','blusas','pantalones','faldas','accesorios','calzados','sweaters','remeras','hoodies','joggers'];
+const emojis = {vestidos:'👗',blusas:'👚',pantalones:'👖',faldas:'🪡',accesorios:'👜',calzados:'👟',sweaters:'🧥',remeras:'👕',hoodies:'🧤',joggers:'🩳'};
+const bgColors = {vestidos:'#1a1010',blusas:'#101510',pantalones:'#10101a',faldas:'#181210',accesorios:'#151015',calzados:'#0f1218',sweaters:'#121018',remeras:'#101818',hoodies:'#181018',joggers:'#151510'};
 
 // ══════════════════════════════════
-//  CARGAR PRODUCTOS EN TIEMPO REAL
+//  FIRESTORE — escuchar en tiempo real
 // ══════════════════════════════════
 db.collection('productos').orderBy('createdAt','desc').onSnapshot(function(snapshot) {
-  products = snapshot.docs.map(function(d){ return Object.assign({id: d.id}, d.data()); });
+  products = snapshot.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
   renderProducts(currentFilter === 'todos' ? products : products.filter(function(p){ return p.cat === currentFilter; }));
   updateCategoryCounts();
 }, function(error) {
-  console.error('Error cargando productos:', error);
-  document.getElementById('productsGrid').innerHTML = '<p style="color:#e55;text-align:center;padding:2rem;grid-column:1/-1">Error conectando con Firebase. Revisá la consola.</p>';
+  console.error('Error Firebase:', error);
+  document.getElementById('productsGrid').innerHTML = '<p style="color:#e55;text-align:center;padding:2rem;grid-column:1/-1">Error al conectar con Firebase: '+error.message+'</p>';
 });
 
 // ══════════════════════════════════
@@ -631,7 +653,7 @@ db.collection('productos').orderBy('createdAt','desc').onSnapshot(function(snaps
 function productThumb(p, size) {
   size = size || 'big';
   if (p.photo) return '<img src="'+p.photo+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover">';
-  return '<span class="'+(size==='big'?'emoji-placeholder':'')+'" style="font-size:'+(size==='big'?'5rem':'1.8rem')+';opacity:.3">'+(emojis[p.cat]||'👗')+'</span>';
+  return '<span class="'+(size==='big'?'emoji-placeholder':'')+'" style="font-size:'+(size==='big'?'5rem':'1.8rem')+';opacity:.3">'+(emojis[p.cat]||'👕')+'</span>';
 }
 
 function renderProducts(list) {
@@ -658,7 +680,7 @@ function renderProducts(list) {
 }
 
 function updateCategoryCounts() {
-  ['vestidos','blusas','pantalones','faldas','accesorios'].forEach(function(cat) {
+  CATS.forEach(function(cat) {
     var el = document.getElementById('cnt-'+cat);
     if (el) el.textContent = products.filter(function(p){return p.cat===cat;}).length + ' artículos';
   });
@@ -708,8 +730,7 @@ function updateCartUI() {
   el.innerHTML=cart.map(function(item){
     return '<div class="cart-item">'
       +'<div class="cart-item-img" style="background:'+(bgColors[item.cat]||'#161616')+'">'+productThumb(item,'small')+'</div>'
-      +'<div class="cart-item-info">'
-      +'<div class="cart-item-name">'+item.name+'</div>'
+      +'<div class="cart-item-info"><div class="cart-item-name">'+item.name+'</div>'
       +'<div class="cart-item-cat">'+item.cat+'</div>'
       +'<div class="cart-item-qty">'
       +'<button class="qty-btn" onclick="changeQty(\''+item.id+'\',-1)">−</button>'
@@ -717,8 +738,7 @@ function updateCartUI() {
       +'<button class="qty-btn" onclick="changeQty(\''+item.id+'\',1)">+</button>'
       +'</div></div>'
       +'<div class="cart-item-price">₲ '+(item.price*item.qty).toLocaleString()+'</div>'
-      +'<button class="remove-item" onclick="removeFromCart(\''+item.id+'\')">✕</button>'
-      +'</div>';
+      +'<button class="remove-item" onclick="removeFromCart(\''+item.id+'\')">✕</button></div>';
   }).join('');
 }
 function toggleCart() {
@@ -739,13 +759,13 @@ function orderViaWhatsapp() {
 function quickView(id) {
   var p=products.find(function(x){return x.id===id;}); if(!p) return;
   document.getElementById('qvImg').style.background=bgColors[p.cat]||'#161616';
-  document.getElementById('qvImg').innerHTML=p.photo?'<img src="'+p.photo+'" alt="'+p.name+'">':`<span style="opacity:.3;font-size:7rem">${emojis[p.cat]||'👗'}</span>`;
+  document.getElementById('qvImg').innerHTML=p.photo?'<img src="'+p.photo+'" alt="'+p.name+'">'
+    :'<span style="opacity:.3;font-size:7rem">'+(emojis[p.cat]||'👕')+'</span>';
   document.getElementById('qvCat').textContent=p.cat;
   document.getElementById('qvName').textContent=p.name;
   document.getElementById('qvPrice').innerHTML='₲ '+Number(p.price).toLocaleString()+(p.oldPrice?'<span class="old">₲ '+Number(p.oldPrice).toLocaleString()+'</span>':'');
   document.getElementById('qvSizes').innerHTML=(p.sizes||[]).map(function(s){return '<span class="qv-size-chip">'+s+'</span>';}).join('');
-  var badge=document.getElementById('qvBadgeEl');
-  badge.innerHTML=p.badge?'<span class="qv-badge-el">'+p.badge.toUpperCase()+'</span>':'';
+  document.getElementById('qvBadgeEl').innerHTML=p.badge?'<span class="qv-badge-el">'+p.badge.toUpperCase()+'</span>':'';
   document.getElementById('qvCartBtn').onclick=function(){addToCart(id);closeQV();};
   document.getElementById('qvOverlay').classList.add('open');
   document.getElementById('qvModal').classList.add('open');
@@ -764,15 +784,14 @@ function handlePhotoSelect(e) {
   pendingPhotoFile=file;
   var reader=new FileReader();
   reader.onload=function(ev){
-    pendingPhotoData=ev.target.result;
-    document.getElementById('photoPreviewImg').src=pendingPhotoData;
+    document.getElementById('photoPreviewImg').src=ev.target.result;
     document.getElementById('photoPreviewName').textContent=file.name;
     document.getElementById('photoPreviewWrap').classList.add('has-img');
   };
   reader.readAsDataURL(file);
 }
 function clearPhoto() {
-  pendingPhotoFile=null; pendingPhotoData=null;
+  pendingPhotoFile=null;
   document.getElementById('photoInput').value='';
   document.getElementById('photoPreviewWrap').classList.remove('has-img');
   document.getElementById('photoPreviewImg').src='';
@@ -787,8 +806,7 @@ zone.addEventListener('drop',function(e){
     pendingPhotoFile=file;
     var reader=new FileReader();
     reader.onload=function(ev){
-      pendingPhotoData=ev.target.result;
-      document.getElementById('photoPreviewImg').src=pendingPhotoData;
+      document.getElementById('photoPreviewImg').src=ev.target.result;
       document.getElementById('photoPreviewName').textContent=file.name;
       document.getElementById('photoPreviewWrap').classList.add('has-img');
     };
@@ -797,7 +815,7 @@ zone.addEventListener('drop',function(e){
 });
 
 // ══════════════════════════════════
-//  ADMIN — AGREGAR
+//  ADMIN — AGREGAR PRODUCTO
 // ══════════════════════════════════
 function addProduct() {
   var name=document.getElementById('newName').value.trim();
@@ -827,7 +845,7 @@ function addProduct() {
       btn.disabled=false; btn.textContent='Agregar al catálogo';
     }).catch(function(err){
       console.error('Firestore error:',err);
-      showToast('Error al guardar: '+err.message);
+      showToast('Error: '+err.message);
       btn.disabled=false; btn.textContent='Agregar al catálogo';
     });
   }
@@ -847,7 +865,6 @@ function addProduct() {
       },
       function(err){
         console.error('Storage error:',err);
-        showToast('Error al subir foto, guardando sin foto...');
         progress.style.display='none';
         saveToFirestore(null);
       },
@@ -871,11 +888,9 @@ function renderAdminList() {
   if(!products.length){el.innerHTML='<p style="color:var(--text-dim);text-align:center;padding:2rem">No hay productos cargados aún.</p>';return;}
   el.innerHTML=products.map(function(p){
     return '<div class="admin-product-row">'
-      +'<div class="admin-prod-thumb">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'">':(emojis[p.cat]||'👗'))+'</div>'
-      +'<div class="admin-prod-info">'
-      +'<div class="admin-prod-name">'+p.name+'</div>'
-      +'<div class="admin-prod-cat">'+p.cat+' · '+(p.sizes||[]).join(', ')+'</div>'
-      +'</div>'
+      +'<div class="admin-prod-thumb">'+(p.photo?'<img src="'+p.photo+'" alt="'+p.name+'">':(emojis[p.cat]||'👕'))+'</div>'
+      +'<div class="admin-prod-info"><div class="admin-prod-name">'+p.name+'</div>'
+      +'<div class="admin-prod-cat">'+p.cat+' · '+(p.sizes||[]).join(', ')+'</div></div>'
       +'<div class="admin-prod-price">₲ '+Number(p.price).toLocaleString()+'</div>'
       +'<div class="admin-actions">'
       +'<button class="btn-edit" onclick="editProduct(\''+p.id+'\')">Editar precio</button>'
@@ -889,7 +904,7 @@ function deleteProduct(id) {
   if(!confirm('¿Eliminar "'+p.name+'"?')) return;
   db.collection('productos').doc(id).delete()
     .then(function(){showToast('"'+p.name+'" eliminado ✦');})
-    .catch(function(err){showToast('Error al eliminar: '+err.message);});
+    .catch(function(err){showToast('Error: '+err.message);});
 }
 
 function editProduct(id) {
