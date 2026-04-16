@@ -10,6 +10,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
 <style>
 :root{
   --negro:#0a0a0a;--negro-mid:#111111;--negro-card:#161616;--negro-borde:#252525;--negro-hover:#1e1e1e;
@@ -607,9 +608,6 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
 // ══════════════════════════════════
 //  FIREBASE CONFIG — SDK COMPAT
 // ══════════════════════════════════
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyCZVVsB6g6CpNzx78Ua1GNQVZyjjWwUoSE",
   authDomain: "bebeclothingstore-dea9f.firebaseapp.com",
@@ -618,70 +616,10 @@ const firebaseConfig = {
   messagingSenderId: "521191441115",
   appId: "1:521191441115:web:aeef6118d2a1d2eb9542fe"
 };
-  
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
-const db = getFirestore(app);
-  
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
-
-  async function subirProducto() {
-    const nombre = document.getElementById('nombreProducto').value;
-    const precio = document.getElementById('precioProducto').value;
-    const imagenFile = document.getElementById('inputImagen').files[0];
-
-    if (!imagenFile) return alert("Selecciona una imagen");
-
-    try {
-        // Subir al Storage
-        const storageRef = ref(storage, 'productos/' + Date.now() + "_" + imagenFile.name);
-        await uploadBytes(storageRef, imagenFile);
-        
-        // Obtener Link
-        const urlImagen = await getDownloadURL(storageRef);
-
-        // Guardar en Firestore
-        await addDoc(collection(db, "productos"), {
-            nombre: nombre,
-            precio: precio,
-            imagen: urlImagen,
-            fecha: new Date()
-        });
-
-        alert("Producto guardado con éxito");
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-  function cargarProductos() {
-    const contenedor = document.getElementById('contenedor-productos');
-    const q = query(collection(db, "productos"), orderBy("fecha", "desc"));
-
-    onSnapshot(q, (snapshot) => {
-        contenedor.innerHTML = ''; 
-        snapshot.forEach((doc) => {
-            const p = doc.data();
-            contenedor.innerHTML += `
-                <div class="producto-card">
-                    <img src="${p.imagen}" style="width: 100%; height: 200px; object-fit: cover;">
-                    <h3>${p.nombre}</h3>
-                    <p>$${p.precio}</p>
-                </div>
-            `;
-        });
-    });
-}
-
-// --- PARTE 6: HACER QUE TODO FUNCIONE ---
-// Esto hace que el botón de tu HTML pueda ver la función
-window.subirProducto = subirProducto;
-
-// Ejecutamos la carga al abrir la página
-cargarProductos();
-  
 
 // ══════════════════════════════════
 //  GLOBALS
@@ -700,7 +638,7 @@ const bgColors = {vestidos:'#1a1010',blusas:'#101510',pantalones:'#10101a',falda
 // ══════════════════════════════════
 //  FIRESTORE — escuchar en tiempo real
 // ══════════════════════════════════
-db.collection('productos').orderBy('createdAt','desc').onSnapshot(function(snapshot) {
+db.collection('productos').onSnapshot(function(snapshot) {
   products = snapshot.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
   renderProducts(currentFilter === 'todos' ? products : products.filter(function(p){ return p.cat === currentFilter; }));
   updateCategoryCounts();
