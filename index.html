@@ -74,7 +74,7 @@ section{padding:5rem 2rem;}
 .section-title em{font-style:italic;color:var(--dorado);}
 .gold-line{width:3rem;height:1px;background:var(--dorado);margin:.75rem auto 0;}
 
-/* CATEGORIES — grid adaptable para 11 categorías */
+/* CATEGORIES */
 #categories{background:var(--negro-mid);}
 .cats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;}
 .cat-card{background:var(--negro-card);border:1px solid var(--negro-borde);border-radius:var(--radius-lg);padding:1.5rem .75rem;text-align:center;cursor:pointer;transition:var(--tr);text-decoration:none;}
@@ -606,7 +606,7 @@ footer{background:#050505;color:var(--blanco-60);padding:3.5rem 2rem 1.5rem;bord
 
 <script>
 // ══════════════════════════════════
-//  FIREBASE CONFIG — SDK COMPAT
+//  FIREBASE CONFIG
 // ══════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyCZVVsB6g6CpNzx78Ua1GNQVZyjjWwUoSE",
@@ -640,6 +640,8 @@ const bgColors = {vestidos:'#1a1010',blusas:'#101510',pantalones:'#10101a',falda
 // ══════════════════════════════════
 db.collection('productos').onSnapshot(function(snapshot) {
   products = snapshot.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
+  // Filtrar documentos vacíos o sin nombre
+  products = products.filter(function(p){ return p.name && p.price; });
   renderProducts(currentFilter === 'todos' ? products : products.filter(function(p){ return p.cat === currentFilter; }));
   updateCategoryCounts();
 }, function(error) {
@@ -844,8 +846,9 @@ function addProduct() {
       showToast('"'+name+'" guardado en la nube ✦');
       btn.disabled=false; btn.textContent='Agregar al catálogo';
     }).catch(function(err){
-      console.error('Firestore error:',err);
-      showToast('Error: '+err.message);
+      console.error('Firestore error:', err);
+      // *** ALERT PARA VER EL ERROR EXACTO ***
+      alert('ERROR AL GUARDAR:\nCódigo: ' + err.code + '\nMensaje: ' + err.message);
       btn.disabled=false; btn.textContent='Agregar al catálogo';
     });
   }
@@ -865,13 +868,19 @@ function addProduct() {
       },
       function(err){
         console.error('Storage error:',err);
+        // *** ALERT PARA VER EL ERROR DE STORAGE ***
+        alert('ERROR AL SUBIR FOTO:\nCódigo: ' + err.code + '\nMensaje: ' + err.message);
         progress.style.display='none';
-        saveToFirestore(null);
+        btn.disabled=false; btn.textContent='Agregar al catálogo';
       },
       function(){
         uploadTask.snapshot.ref.getDownloadURL().then(function(url){
           progress.style.display='none';
           saveToFirestore(url);
+        }).catch(function(err){
+          alert('ERROR AL OBTENER URL:\nCódigo: ' + err.code + '\nMensaje: ' + err.message);
+          progress.style.display='none';
+          btn.disabled=false; btn.textContent='Agregar al catálogo';
         });
       }
     );
